@@ -1,14 +1,15 @@
 #!/bin/bash
 #
 # johnson cron daily
-
-if test -e /home/nmq-hyt/Backups/nmq-hyt_backup_$(date +%d%b%y)
+FILE=/home/nmq-hyt/Backups/backup_$(date +%d%b%y).tar
+FILEDATE=$(date +%a)
+if test -e "$FILE"
 then
-	echo "Backup already exists"
+echo "Backup already exists"
+elif test "$FILEDATE" = "Sun"
+then
+rw * ~/Backups
 else
-	tar -cf nmq-hyt_backup_$(date +%d%b%y).tar /home/nmq-hyt/Projects /home/nmq-hyt/Documents  
-	mv nmq-hyt_backup_$(date +%d%b%y).tar ~/Backups 
+	tar -cf backup_$(date +%d%b%y).tar /home/nmq-hyt/Projects /home/nmq-hyt/Documents  
+	mv backup_$(date +%d%b%y).tar ~/Backups 
 fi
-# add rudimentary redundancy checking
-# e.g. go to Backups, scan directory for .tarfile matching todays date,
-# exit failure if backup has already been made
