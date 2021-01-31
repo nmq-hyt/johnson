@@ -11,5 +11,6 @@ then
 rw * ~/Backups
 else
 tar -cf backup_$(date +%d%b%y).tar /home/nmq-hyt/Projects /home/nmq-hyt/Documents
+
 mv backup_$(date +%d%b%y).tar ~/Backups
 fi
